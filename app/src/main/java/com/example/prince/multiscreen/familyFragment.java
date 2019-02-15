@@ -13,7 +13,7 @@ import android.widget.TextView;
  */
 public class familyFragment extends Fragment {
 
-
+    TextView song_name;
     public familyFragment() {
         // Required empty public constructor
     }
@@ -22,9 +22,11 @@ public class familyFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        TextView textView = new TextView(getActivity());
-        textView.setText("");
-        return textView;
+
+        View rootView = inflater.inflate(R.layout.activity_family, container, false);
+      song_name=(TextView) rootView.findViewById(R.id.song_name);
+      song_name.setSelected(true);
+        return rootView;
     }
 
 }

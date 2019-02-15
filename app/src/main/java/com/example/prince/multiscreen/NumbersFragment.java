@@ -3,6 +3,7 @@ package com.example.prince.multiscreen;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.media.AudioManager;
@@ -265,7 +266,6 @@ public class NumbersFragment extends Fragment {
         } else {
             out = minutes + ":" + seconds;
         }
-
         return out;
 
     }
