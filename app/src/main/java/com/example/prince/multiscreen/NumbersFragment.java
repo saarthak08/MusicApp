@@ -95,7 +95,6 @@ public class NumbersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_numbers, container, false);
-        Toast.makeText(getActivity().getApplicationContext(), "loading songs...", Toast.LENGTH_LONG).show();
         // Create and setup the {@link AudioManager} to request audio focus
         mAudioManager = (AudioManager)
                 getActivity().getSystemService(Context.AUDIO_SERVICE);
