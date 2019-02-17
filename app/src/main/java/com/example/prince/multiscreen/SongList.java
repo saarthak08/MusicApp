@@ -10,11 +10,11 @@ public class SongList {
     private String msongName;
     private String msingerName;
     private String songDuration;
-    private int mimageResourecId;
+    private String mimageResourecId;
     private String maudioResourceId;
     private String mImage;
 
-    public SongList(String msongName, String msingerName, String songDuration, int mimageResourecId, String maudioResourceId, String x) {
+    public SongList(String msongName, String msingerName, String songDuration, String mimageResourecId, String maudioResourceId, String x) {
         this.msongName = msongName;
         this.msingerName = msingerName;
         this.songDuration = songDuration;
@@ -23,7 +23,7 @@ public class SongList {
         mImage=x;
     }
 
-    public int getMimageResourecId() {
+    public String getMimageResourecId() {
         return mimageResourecId;
     }
 

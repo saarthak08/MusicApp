@@ -251,7 +251,7 @@ public class NumbersFragment extends Fragment {
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                     String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     String time = convertDuration(Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))));
-                    list.add(new SongList(name, artist, time, R.mipmap.music, url,x));
+                    list.add(new SongList(name, artist, time, x, url,x));
 
                 } while (cursor.moveToNext());
             }
