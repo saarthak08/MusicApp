@@ -1,8 +1,9 @@
 package com.example.prince.multiscreen;
 
-import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.example.prince.multiscreen.Fragments.colorsFragment;
 
 public class colors extends AppCompatActivity {
     @Override
