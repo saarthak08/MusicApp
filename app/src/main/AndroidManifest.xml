@@ -13,7 +13,8 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LauncherActivity"
-            android:theme="@style/NoAction">
+            android:theme="@style/NoAction"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
