@@ -26,9 +26,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/image"
+            android:maxLines="1"
             android:text="let me love you"
-            android:textSize="16sp"
-            android:maxLines="1"/>
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/singer"
@@ -37,8 +37,8 @@
             android:layout_below="@id/song"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/image"
-            android:text="unknown sources"
-            android:maxLength="22"/>
+            android:maxLength="22"
+            android:text="unknown sources" />
 
         <TextView
             android:id="@+id/time"

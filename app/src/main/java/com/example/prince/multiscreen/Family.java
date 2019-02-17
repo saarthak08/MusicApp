@@ -3,6 +3,8 @@ package com.example.prince.multiscreen;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.prince.multiscreen.Fragments.familyFragment;
+
 public class Family extends AppCompatActivity {
 
     @Override

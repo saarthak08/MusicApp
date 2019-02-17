@@ -1,4 +1,4 @@
-package com.example.prince.multiscreen;
+package com.example.prince.multiscreen.Fragments;
 
 
 import android.os.Bundle;

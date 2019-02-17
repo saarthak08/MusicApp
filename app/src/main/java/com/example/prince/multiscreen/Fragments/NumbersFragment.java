@@ -1,12 +1,14 @@
-package com.example.prince.multiscreen;
+package com.example.prince.multiscreen.Fragments;
 
 
 import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.AudioManager;
+import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -15,24 +17,27 @@ import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.prince.multiscreen.Adapters.SongAdapter;
+import com.example.prince.multiscreen.R;
+import com.example.prince.multiscreen.SongList;
+
 import java.util.ArrayList;
-import java.util.List;
+
+import static com.example.prince.multiscreen.R.drawable.cover_art;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NumbersFragment extends Fragment {
-
-
     final ArrayList<SongList> list = new ArrayList<>();
     ListView listView;
     SongAdapter itemsAdapter;
@@ -123,7 +128,28 @@ public class NumbersFragment extends Fragment {
 
                 // Get the {@link Word} object at the given position the user clicked on
                 SongList songlist = list.get(position);
+                TextView textViewSong=getActivity().findViewById(R.id.textViewSong);
+                String k=songlist.getMsongName();
+                String x=k.substring(0,k.length()-4);
+                textViewSong.setText(x);
+                textViewSong.setSelected(true);
+                ImageView imageViewSong=getActivity().findViewById(R.id.imageViewSong);
+                String n=songlist.getSongImage();
+                android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+                mmr.setDataSource(songlist.getSongImage());
+                try{
+                    byte data[] =mmr.getEmbeddedPicture();
+                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                    imageViewSong.setImageBitmap(bitmap);
+                    imageViewSong.setAdjustViewBounds(true);
 
+                }
+                catch (Exception e)
+                {
+                    e.printStackTrace();
+                    imageViewSong.setImageResource(R.drawable.cover_art);
+
+                }
                 // Request audio focus so in order to play the audio file. The app needs to play a
                 // short audio file, so we will request audio focus with a short amount of time
                 // with AUDIOFOCUS_GAIN_TRANSIENT.
@@ -212,17 +238,20 @@ public class NumbersFragment extends Fragment {
 
 
     public void loadSongs() {
+        byte[] data=null;
         Uri uri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
         String selection = MediaStore.Audio.Media.IS_MUSIC + "!=0";
         Cursor cursor = getActivity().getContentResolver().query(uri, null, selection, null, null);
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 do {
+                    int column_index = cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.DATA);
+                    String x=cursor.getString(column_index);
                     String name = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME));
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                     String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     String time = convertDuration(Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))));
-                    list.add(new SongList(name, artist, time, R.mipmap.music, url));
+                    list.add(new SongList(name, artist, time, R.mipmap.music, url,x));
 
                 } while (cursor.moveToNext());
             }

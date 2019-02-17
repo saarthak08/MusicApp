@@ -1,10 +1,15 @@
-package com.example.prince.multiscreen;
+package com.example.prince.multiscreen.Adapters;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+
+import com.example.prince.multiscreen.Fragments.NumbersFragment;
+import com.example.prince.multiscreen.R;
+import com.example.prince.multiscreen.Fragments.colorsFragment;
+import com.example.prince.multiscreen.Fragments.familyFragment;
 
 public class CategoryAdapter extends FragmentPagerAdapter {
     /** Context of the app */
