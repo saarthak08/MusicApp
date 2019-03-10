@@ -46,6 +46,7 @@ public class NumbersFragment extends Fragment {
     ListView listView;
     SongAdapter itemsAdapter;
     public static  SongList songlist;
+    Intent i;
     /**
      * Handles playback of all the sound files
      */
@@ -81,13 +82,13 @@ public class NumbersFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_numbers, container, false);
-        final Intent i=new Intent(getActivity(), MusicService.class);
         // Create and setup the {@link AudioManager} to request audio focus
         // Create an {@link ArrayAdapter}, whose data source is a list of Strings. The
         // adapter knows how to create layouts for each item in the list, using the
         // simple_list_item_1.xml layout resource defined in the Android framework.
         // This list item layout contains a single {@link TextView}, which the adapter will set to
         // display a single word.
+        i=new Intent(getActivity(),MusicService.class);
         itemsAdapter =
                 new SongAdapter(getActivity(), list);
 
@@ -143,14 +144,6 @@ public class NumbersFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        // When the activity is stopped, release the media player resources because we won't
-        // be playing any more sounds.
-    }
-
     private void checkUserPermission() {
         if (Build.VERSION.SDK_INT >= 23) {
             if (ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -160,6 +153,14 @@ public class NumbersFragment extends Fragment {
             }
         }
         loadSongs();
+    }
+
+    @Override
+    public void onDestroy() {
+        if(i!=null)
+        {
+            getActivity().stopService(i);
+        }        super.onDestroy();
     }
 
     @Override

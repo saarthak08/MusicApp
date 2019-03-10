@@ -10,8 +10,7 @@ import android.os.IBinder;
 
 import com.example.prince.multiscreen.Fragments.NumbersFragment;
 
-public class MusicService extends Service implements MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
-        MediaPlayer.OnCompletionListener
+public class MusicService extends Service
 {
     public static MediaPlayer mMediaPlayer;
     public static AudioManager mAudioManager;
@@ -50,7 +49,6 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
         super.onCreate();
         releaseMediaPlayer();
         mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
-        mAudioManager = (AudioManager)getSystemService(Context.AUDIO_SERVICE);
         int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
                 AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
@@ -59,14 +57,13 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
             // Create and setup the {@link MediaPlayer} for the audio resource associated
             // with the current word
-            mMediaPlayer = MediaPlayer.create(MusicService.this, Uri.parse(NumbersFragment.songlist.getMaudioResourceId()));
-
-            // Start the audio file
-            mMediaPlayer.start();
-
-            // Setup a listener on the media player, so that we can stop and release the
-            // media player once the sound has finished playing.
-            mMediaPlayer.setOnCompletionListener(mCompletionListener);
+                if(NumbersFragment.songlist.getMaudioResourceId()==null)
+                {
+                    onDestroy();
+                }
+                mMediaPlayer = MediaPlayer.create(MusicService.this, Uri.parse(NumbersFragment.songlist.getMaudioResourceId()));
+                mMediaPlayer.start();
+                mMediaPlayer.setOnCompletionListener(mCompletionListener);
         }
 
     }
@@ -104,23 +101,8 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         releaseMediaPlayer();
-    }
-
-    @Override
-    public void onCompletion(MediaPlayer mp) {
-
-    }
-
-    @Override
-    public boolean onError(MediaPlayer mp, int what, int extra) {
-        return false;
-    }
-
-    @Override
-    public void onPrepared(MediaPlayer mp) {
-
+        super.onDestroy();
     }
 
 }
