@@ -118,7 +118,6 @@ public class NumbersFragment extends Fragment {
                 textViewSong.setText(x);
                 textViewSong.setSelected(true);
                 ImageView imageViewSong=getActivity().findViewById(R.id.imageViewSong);
-                String n=songlist.getSongImage();
                 android.media.MediaMetadataRetriever mmr = new MediaMetadataRetriever();
                 mmr.setDataSource(songlist.getSongImage());
                 try{
@@ -197,7 +196,7 @@ public class NumbersFragment extends Fragment {
                     String artist = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.ARTIST));
                     String url = cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA));
                     String time = convertDuration(Long.parseLong(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION))));
-                    list.add(new SongList(name, artist, time, R.mipmap.music, url,x));
+                    list.add(new SongList(name, artist, time,url,x));
 
                 } while (cursor.moveToNext());
             }
@@ -243,4 +242,6 @@ public class NumbersFragment extends Fragment {
         return out;
 
     }
+
+
 }
